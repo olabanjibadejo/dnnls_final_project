@@ -2,8 +2,8 @@
 
 ## QUICK LINKS
 
-- **[Experiments Notebook](baseline.ipynb)** — Full experimental workflow
-- **[Final Results](results/final_results.csv)** — Quantitative evaluation metrics
+- **[Final Notebook](notebooks/Final_assessment_template_with_explainableAI.ipynb)** — Full experimental workflow
+- **[Final Results](results/tables/final_results.csv)** — Quantitative evaluation metrics
 - **[Figures](results/plots)** — Attention maps, similarity distributions, qualitative predictions
 
 ## PROJECT OVERVIEW
@@ -34,7 +34,7 @@ The following metrics were used to evaluate the baseline model and the improved 
 
 I wrote a **evaluate_model(...)** class to calculate these metrics all through the experiments.
 
-- **[Code Screeshot](baseline.ipynb)** — evaluate_model class
+- **[Code Screeshot](code_snapshots/evaluate_model.png)** — evaluate_model class
 
 
 ## EXPERIMENT 1 — VISUAL TRANSFER LEARNING
@@ -43,7 +43,7 @@ The baseline visual encoder was trained from scratch. Although suitable for reco
 
 To improve this, the convolutional encoder was replaced with a pretrained ResNet-18 backbone initialized with ImageNet weights.
 
-- **[Code Screeshot](baseline.ipynb)** — Visual Encoder with resnet backbone
+- **[Code Screeshot](code_snapshots/resnet.png)** — Visual Encoder with resnet backbone
 
 **Key Insight**
 
@@ -55,11 +55,11 @@ The baseline architecture concatenated image and text embeddings without explici
 
 To address this, a global contrastive alignment objective was introduced and included in the training loop
 
-- **[Code Screeshot](baseline.ipynb)** — Global Alignment Loss
+- **[Code Screeshot](code_snapshots/global_alignment.png)** — Global Alignment Loss
   
 **Initial Finding**
 
-Applying contrastive alignment too aggressively during early training destabilized text learning, causing text loss to increase significantly. - **[Training Log](baseline.ipynb)**
+Applying contrastive alignment too aggressively during early training destabilized text learning, causing text loss to increase significantly. - **[Training Log](experiments/exp2_alignment/training_log.txt)**
 
 **Lesson Learned**
 
@@ -71,16 +71,16 @@ The baseline architecture concatenated image and text embeddings without explici
 
 To stabilize training, the contrastive objective was delayed until later epochs and its weighting was reduced.
 
-- **[Code screenshot](baseline.ipynb)** - Delayed Contrastive Loss
-- **[Training Log](baseline.ipynb)** 
+- **[Code screenshot](code_snapshots/contrastive_loss.png)** - Delayed Contrastive Loss
+- **[Training Log](experiments/exp2_alignment_stable/training_log.txt)** 
 
 ## FINAL RESULTS
 
 The stabilized contrastive model significantly improved BLEU score while maintaining comparable image reconstruction quality. 
 
-- **[Final Results](baseline.ipynb)** - Table comparison for metrics across experiments
+- **[Final Results](results/tables/final_results.csv)** - Table comparison for metrics across experiments
 
-MSE increased by
+MSE increased by 
 SSIM inceased by
 BLEU increased by
 ROUGE increased by
@@ -91,20 +91,22 @@ ROUGE increased by
 
 I modified the Attention class to return weights across frames. These weights were used to generate an attention heatmap/plot that helped to show which frames contributed the most in generating the predicted image.
 
-- **[Code screenshot](baseline.ipynb)** - Attention Visualization
+- **[Code screenshot](code_snapshots/attention_visualization.png)** - Attention Visualization Code
+- **[Figure](results/plots/attention_heatmap_final.png)** - Attention Visualization Plot
 
 **Similarity Distribution**
 
 Although the embedding space remained highly compressed, positive image-text pairs consistently exhibited slightly higher cosine similarity than negative pairs. This suggests weak but meaningful multimodal alignment.
 
-- **[Code screenshot](baseline.ipynb)** - Similarity plotting function
-- **[Figure](baseline.ipynb)** - Similarity plotting 
+- **[Code screenshot](code_snapshots/embedding_similarity.png)** - Similarity plotting function
+- **[Figure](results/plots/similarity_distribution.png)** - Similarity plotting 
 
 ## FINAL BAR PLOT
 
 The final comparison plot highlights the trade-offs between visual reconstruction quality and multimodal alignment performance across experiments.
 
-- **[Code screenshot](baseline.ipynb)**
+- **[Code screenshot](code_snapshots/bar_plot.png)**
+- **[Figure](results/plots/final_comparison_plot.png)** 
 
 ## CHALLENGES FACED
 
