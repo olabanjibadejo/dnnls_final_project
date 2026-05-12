@@ -80,10 +80,13 @@ The stabilized contrastive model significantly improved BLEU score while maintai
 
 - **[Final Results](results/tables/final_results.csv)** - Table comparison for metrics across experiments
 
-MSE increased by 
-SSIM inceased by
-BLEU increased by
-ROUGE increased by
+| Metric      | Baseline | Final Model | Percentage Change |
+| ----------- | -------- | ----------- | ----------------- |
+| **MSE**     | 0.078449 | 0.079198    | **+0.95%**        |
+| **SSIM**    | 0.127318 | 0.131609    | **+3.37%**        |
+| **BLEU**    | 0.003040 | 0.005190    | **+70.75%**       |
+| **ROUGE-L** | 0.175833 | 0.171354    | **−2.55%**        |
+
 
 ## EXPLAINABLE AI
 
